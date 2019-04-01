@@ -25,7 +25,7 @@
 FROM microsoft/dotnet:2.1-sdk
 WORKDIR /app
 #EXPOSE 59518
-EXPOSE 5000
+EXPOSE 5010
 
 # copy csproj and restore as distinct layers
 COPY *.csproj ./
@@ -35,7 +35,7 @@ RUN dotnet restore
 COPY . ./
 RUN dotnet publish -c Dev -o app
 
-ENV ASPNETCORE_URLS=http://+:5000
+ENV ASPNETCORE_URLS=http://+:5010
 
 ENTRYPOINT ["dotnet", "app/WebApiRestIntoNetCore_Sample.dll"]
 
@@ -48,10 +48,10 @@ ENTRYPOINT ["dotnet", "app/WebApiRestIntoNetCore_Sample.dll"]
 #Siempre compilar desplegar docker en directorio root app y con permisos de usuario admin
 #*/
 
-#docker build -t webapirestintonetcore_sample-dev .
+#docker build -t webapirestintonetcore_sampledockerimage-dev .
 #run for console.
-#docker run --rm -p 5000:500 webapirestintonetcore_sample-dev webapirestintonetcore_sample from Docker
+#docker run --rm -p 5010:5010 webapirestintonetcore_sampledockerimage-dev webapirestintonetcore_sample from Docker
 #run interactive for VSCode.
-# docker run --rm -it webapirestintonetcore_sample-dev:latest
+# docker run --rm -it webapirestintonetcore_sampledockerimage-dev:latest
 #docker exec -it 1ba7fd6728e7 cmd
 #docker run -v $(pwd):/src -it <container_name>
