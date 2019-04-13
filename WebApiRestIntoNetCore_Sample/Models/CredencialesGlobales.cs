@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace WebApiRestIntoNetCore_Sample.Models
 {
     public class CredencialesGlobales
     {
-        public void Configure(IApplicationBuilder app)
+        public static IConfiguration AppSetting { get; }
+
+        static CredencialesGlobales()
         {
-            // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+            AppSetting = new ConfigurationBuilder()
+                                .SetBasePath(Directory.GetCurrentDirectory())
+                                .AddJsonFile("appsettings.json")
+                                .Build();
         }
     }
 }
